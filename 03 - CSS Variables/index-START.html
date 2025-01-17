@@ -1,77 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Scoped CSS Variables and JS</title>
-  <link rel="icon" href="https://fav.farm/🔥" />
-</head>
-<body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Scoped CSS Variables and JS</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <h2>Update CSS Variables with <span class="hl">JS</span></h2>
 
-  <div class="controls">
-    <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    <div class="controls">
+      <label for="spacing">Spacing:</label>
+      <input
+        id="spacing"
+        type="range"
+        name="spacing"
+        min="10"
+        max="200"
+        value="10"
+        data-sizing="px"
+      />
 
-    <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+      <label for="blur">Blur:</label>
+      <input
+        id="blur"
+        type="range"
+        name="blur"
+        min="0"
+        max="25"
+        value="0"
+        data-sizing="px"
+      />
 
-    <label for="base">Base Color</label>
-    <input id="base" type="color" name="base" value="#9acd32">
-  </div>
+      <label for="base">Base Color</label>
+      <input id="base" type="color" name="base" value="#9acd32" />
 
-  <img src="/03 - CSS Variables/karsten-winegeart-78bm6j3Vc5A-unsplash.jpg" alt="backgrnd">
+      <label for="margin">Margin:</label>
+      <input
+        id="margin"
+        type="range"
+        name="margin"
+        value="auto"
+        min="0"
+        max="100"
+        data-sizing="px"
+      />
+      <br />
+      <label for="font-size">Font size:</label>
+      <input
+        id="font-size"
+        type="range"
+        name="font-size"
+        value="20"
+        min="20"
+        max="80"
+        data-sizing="px"
+      />
+    </div>
 
-  <style>
+    <img
+      src="/03 - CSS Variables/karsten-winegeart-78bm6j3Vc5A-unsplash.jpg"
+      alt="background"
+    />
 
-    :root{
-      --spacing : 10 px;
-      --blur : 0px;
-      --base : #9acd32;
-    }
+    <style>
+      :root {
+        --spacing: 10 px;
+        --blur: 0px;
+        --base: #9acd32;
+        --margin: 0px;
+        --font-size: 25px;
+      }
 
-    img{
-      border: 5px solid var(--base);
-      padding : var(--spacing);
-      filter: blur(var(--blur));
-      width : 35%;
-    }
+      img {
+        border: 5px solid var(--base);
+        padding: var(--spacing);
+        filter: blur(var(--blur));
+        margin: var(--margin);
+        width: 35%;
+      }
 
-    .hl{
-      color: var(--base);
-    }
+      .hl {
+        color: var(--base);
+      }
 
-    body {
-      text-align: center;
-      background: #193549;
-      color: white;
-      font-family: 'helvetica neue', sans-serif;
-      font-weight: 100;
-      font-size: 50px;
-    }
+      body {
+        text-align: center;
+        background: #193549;
+        color: white;
+        font-family: "helvetica neue", sans-serif;
+        font-weight: 100;
+        font-size: var(--font-size);
+      }
 
-    .controls {
-      margin-bottom: 50px;
-    }
+      .controls {
+        margin-bottom: 50px;
+      }
 
-    input {
-      width: 100px;
-    }
-  </style>
+      input {
+        width: 100px;
+      }
+    </style>
 
-  <script>
-    const inputs = document.querySelectorAll('.controls input');
+    <script>
+      const inputs = document.querySelectorAll(".controls input");
 
-    function handleChange(){
-      const suffix = this.dataset.sizing || ' ';
-      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix );
-    }
+      function handleChange() {
+        const suffix = this.dataset.sizing || " ";
+        if (this.name === "font-size") {
+          document.body.style.setProperty(
+            `--${this.name}`,
+            this.value + suffix
+          );
+        } else {
+          document.documentElement.style.setProperty(
+            `--${this.name}`,
+            this.value + suffix
+          );
+        }
+        console.log(this.value);
+      }
 
-
-
-    inputs.forEach(input => input.addEventListener('change',handleChange));
-    inputs.forEach(input => input.addEventListener('mousemove',handleChange));
-
-  </script>
-
-</body>
+      inputs.forEach((input) => input.addEventListener("change", handleChange));
+      inputs.forEach((input) =>
+        input.addEventListener("mousemove", handleChange)
+      );
+    </script>
+  </body>
 </html>

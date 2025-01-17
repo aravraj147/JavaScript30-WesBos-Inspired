@@ -9,3 +9,7 @@ This is a Self learning repository, where i have forked the code [Respository](h
 ## Project 2 - Modified JS and CSS clock
 
 -Added live time display feature for IST and GMT timezones.
+
+## Project 3 - CSS Variables
+
+-Added similar attributes like Margin,Font-size
